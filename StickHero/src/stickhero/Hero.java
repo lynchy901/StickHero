@@ -50,7 +50,7 @@ class Hero extends Rectangle
         }
         else
         {
-        return heroImg;
+             return heroImg;
         }
     }
     
