@@ -12,7 +12,7 @@ class Hero extends Rectangle
 {
     private int heroX;
     private int heroY;
-    private Image heroImg = Toolkit.getDefaultToolkit().getImage("images/hero.png");
+    private Image heroImg;
     
     public void hero(int x, int y)
     {
@@ -40,4 +40,23 @@ class Hero extends Rectangle
         this.setBounds(x,y,20,20);
         return this;
     }
+    
+    public Image getHeroImg()
+    {
+        if (heroImg == null)
+        {
+            heroImg = Toolkit.getDefaultToolkit().getImage("images/defaultHero.png");
+            return heroImg;
+        }
+        else
+        {
+        return heroImg;
+        }
+    }
+    
+    public void setHeroImg(Image img)
+    {
+        heroImg = img;        
+    }
+    
 }
