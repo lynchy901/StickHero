@@ -8,21 +8,24 @@ import java.awt.Toolkit;
  *
  * @author Stephen
  */
-class Hero extends Rectangle 
+public class Hero extends Rectangle 
 {
     private int heroX;
     private int heroY;
     private Image heroImg;
-    
-    public void hero(int x, int y)
+    private Image heroImg1= Toolkit.getDefaultToolkit().getImage("Images/heroImg1.png");
+    private Image heroImg2= Toolkit.getDefaultToolkit().getImage("Images/heroImg2.png");
+    private Image heroImg3= Toolkit.getDefaultToolkit().getImage("Images/heroImg3.png");
+    private Image heroImg4= Toolkit.getDefaultToolkit().getImage("Images/heroImg4.png");
+
+    public Hero( int characterNumber)
     {
-        this.heroX = x;
-        this.heroY = y;
+        changeCharacterImg(characterNumber);
     }
     
-    public void hero()
-    {    }
-    
+//    public void hero()
+//    {    }
+//    
     public void setHeroX(int x)
     {
         heroX = x;
@@ -45,12 +48,29 @@ class Hero extends Rectangle
     {
         if (heroImg == null)
         {
-            heroImg = Toolkit.getDefaultToolkit().getImage("images/defaultHero.png");
+            heroImg = Toolkit.getDefaultToolkit().getImage("images/heroImg1.png");
             return heroImg;
         }
         else
         {
              return heroImg;
+        }
+    }
+
+    public Image changeCharacterImg(int characterNumber)
+    {
+        switch(characterNumber)
+        {
+            case 1:
+                return heroImg1;
+            case 2:
+                return heroImg2;
+            case 3: 
+                return heroImg3;
+            case 4:
+                return heroImg4;
+            default:
+                return heroImg1;
         }
     }
     
