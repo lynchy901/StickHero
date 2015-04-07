@@ -14,14 +14,23 @@ import javax.swing.JPanel;
  * @author nml5182
  */
 public class MainMenu extends JPanel {
-    private JLabel stickHero;
-    private JButton instructions;
-    private JButton sound;
-    private JButton character;
-    private JButton HighScore;
-    private JLabel artwork;
+    private JLabel stickHeroLabel;
+    private JButton instructionsButton;
+    private JButton soundButton;
+    private JButton characterButton;
+    private JButton highScoreButton;
+    private JLabel artworkLabel;
     
     public MainMenu() {
-        
+        initComponents();
+    }
+    
+    public void initComponents() {
+        stickHeroLabel = new JLabel("Welcome to Stick Hero");
+        instructionsButton = new JButton("Instructions");
+        soundButton = new JButton("Sound");
+        characterButton = new JButton("Character");
+        highScoreButton = new JButton("High Score");
+        artworkLabel = new JLabel("Artwork");
     }
 }
