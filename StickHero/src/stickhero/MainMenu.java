@@ -5,10 +5,23 @@
  */
 package stickhero;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author nml5182
  */
-public class MainMenu {
+public class MainMenu extends JPanel {
+    private JLabel stickHero;
+    private JButton instructions;
+    private JButton sound;
+    private JButton character;
+    private JButton HighScore;
+    private JLabel artwork;
     
+    public MainMenu() {
+        
+    }
 }
