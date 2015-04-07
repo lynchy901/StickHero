@@ -5,6 +5,7 @@
  */
 package stickhero;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -12,21 +13,34 @@ import javax.swing.JFrame;
  * @author nml5182
  */
 public class MainFrame extends JFrame {
-    SplashScreen splashScreenPanel = new SplashScreen();
-    MainMenu mainMenuPanel = new MainMenu();
-    Characters charactersPanel = new Characters();
-    HighScores highScorePanel = new HighScores();
-    GamePanel gamePanel = new GamePanel();
+    private SplashScreen splashScreenPanel;
+    private MainMenu mainMenuPanel;
+    private Characters charactersPanel;
+    private HighScores highScorePanel;
+    private GamePanel gamePanel;
     
     public MainFrame() {
         initComponents();
         showSplashScreen();
+        showMainMenu();
         
         
     }
     
     public void initComponents() {
+        
+        splashScreenPanel = new SplashScreen();
+        mainMenuPanel = new MainMenu();
+        charactersPanel = new Characters();
+        highScorePanel = new HighScores();
+        gamePanel = new GamePanel();
+        
+        
         this.setVisible(true);
+        this.setSize(1200, 1200);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.add(splashScreenPanel);
     }
     
@@ -41,5 +55,12 @@ public class MainFrame extends JFrame {
         }
         
         splashScreenPanel.setVisible(false);
-    }   
+    }
+    
+    public void showMainMenu() {
+        
+        this.add(mainMenuPanel);
+        mainMenuPanel.setBackground(Color.red);
+        mainMenuPanel.setVisible(true);
+    }
 }
