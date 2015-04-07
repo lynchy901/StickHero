@@ -18,7 +18,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 public class SplashScreen extends JPanel {
     private JPanel imagePanel = new JPanel();
     private JLabel imageLabel = new JLabel();
-    private JLabel textLabel = new JLabel("Stick Hero");
+    private JLabel textLabel = new JLabel();
     private ImageIcon theSplashImage;
     
     
@@ -26,7 +26,7 @@ public class SplashScreen extends JPanel {
     
        this.initCustomComponents(); 
         
-       this.setSize(400, 300);
+       this.setSize(1200, 800);
        
        //this.setLocationRelativeTo(null);
     
@@ -35,8 +35,7 @@ public class SplashScreen extends JPanel {
     
     public void initCustomComponents(){
         
-            theSplashImage = new ImageIcon("SplashScreenImage.jpg");
-            this.setBackground(Color.red);
+            theSplashImage = new ImageIcon("Images/stickHero.jpg");
             
             imageLabel.setIcon(theSplashImage);
             
