@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
     public void initComponents() {
         
         splashScreenPanel = new SplashScreen();
-        mainMenuPanel = new MainMenu();
+        mainMenuPanel = new MainMenu(this);
         charactersPanel = new Characters();
         highScorePanel = new HighScores();
         gamePanel = new GamePanel();
@@ -62,5 +62,11 @@ public class MainFrame extends JFrame {
         this.add(mainMenuPanel);
         mainMenuPanel.setBackground(Color.red);
         mainMenuPanel.setVisible(true);
+    }
+    
+    public void showCharacterUI() {
+        this.add(charactersPanel);
+        charactersPanel.setBackground(Color.yellow);
+        charactersPanel.setVisible(true);
     }
 }

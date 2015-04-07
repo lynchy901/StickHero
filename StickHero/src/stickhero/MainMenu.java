@@ -5,9 +5,11 @@
  */
 package stickhero;
 
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -20,17 +22,43 @@ public class MainMenu extends JPanel {
     private JButton characterButton;
     private JButton highScoreButton;
     private JLabel artworkLabel;
+    private MainFrame parentMainFrame;
     
-    public MainMenu() {
+    public MainMenu(MainFrame newMainFrame) {
+        parentMainFrame = newMainFrame;
         initComponents();
     }
     
     public void initComponents() {
+        
+        this.setLayout(new GridLayout(0,1));
         stickHeroLabel = new JLabel("Welcome to Stick Hero");
+        stickHeroLabel.setHorizontalAlignment(SwingConstants.CENTER);
         instructionsButton = new JButton("Instructions");
         soundButton = new JButton("Sound");
         characterButton = new JButton("Character");
         highScoreButton = new JButton("High Score");
         artworkLabel = new JLabel("Artwork");
+        artworkLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.add(stickHeroLabel);
+        this.add(instructionsButton);
+        this.add(soundButton);
+        this.add(characterButton);
+        this.add(highScoreButton);
+        this.add(artworkLabel);
+        
+        characterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                theCharacterButtonActionPerformed(evt);
+            }
+        });
+        
+    }
+    
+    public void theCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        parentMainFrame.showCharacterUI();
+        
     }
 }
