@@ -21,6 +21,7 @@ public class MainMenu extends JPanel {
     private JButton soundButton;
     private JButton characterButton;
     private JButton highScoreButton;
+    private JButton playButton;
     private JLabel artworkLabel;
     private MainFrame parentMainFrame;
     
@@ -34,6 +35,7 @@ public class MainMenu extends JPanel {
         this.setLayout(new GridLayout(0,1));
         stickHeroLabel = new JLabel("Welcome to Stick Hero");
         stickHeroLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        playButton = new JButton("Play");
         instructionsButton = new JButton("Instructions");
         soundButton = new JButton("Sound");
         characterButton = new JButton("Character");
@@ -41,7 +43,9 @@ public class MainMenu extends JPanel {
         artworkLabel = new JLabel("Artwork");
         artworkLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
+        
         this.add(stickHeroLabel);
+        this.add(playButton);
         this.add(instructionsButton);
         this.add(soundButton);
         this.add(characterButton);
@@ -66,6 +70,12 @@ public class MainMenu extends JPanel {
             }
         });
         
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thePlayButtonActionPerformed(evt);
+            }
+        });
+        
     }
     
     public void theCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +93,12 @@ public class MainMenu extends JPanel {
     public void theHighScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         parentMainFrame.showHighScore();
+        
+    }
+    
+    public void thePlayButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        parentMainFrame.showGamePanel();
         
     }
 }

@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
         mainMenuPanel = new MainMenu(this);
         charactersPanel = new Characters();
         highScorePanel = new HighScores();
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         instructionPanel = new Instructions();
         
         
@@ -74,8 +74,7 @@ public class MainFrame extends JFrame {
     
     public void showGamePanel() {
         this.add(gamePanel);
-        gamePanel.setBackground(Color.yellow);
-        charactersPanel.setVisible(true);
+        gamePanel.setVisible(true);
     }
     
     public void showHighScore() {
