@@ -54,11 +54,35 @@ public class MainMenu extends JPanel {
             }
         });
         
+        highScoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                theHighScoreButtonActionPerformed(evt);
+            }
+        });
+        
+        instructionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                theInstructionsButtonActionPerformed(evt);
+            }
+        });
+        
     }
     
     public void theCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         parentMainFrame.showCharacterUI();
+        
+    }
+    
+    public void theInstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        parentMainFrame.showInstructionsPanel();
+        
+    }
+    
+    public void theHighScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        parentMainFrame.showHighScore();
         
     }
 }

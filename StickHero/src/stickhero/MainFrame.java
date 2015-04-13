@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
     private Characters charactersPanel;
     private HighScores highScorePanel;
     private GamePanel gamePanel;
+    private Instructions instructionPanel;
     
     public MainFrame() {
         initComponents();
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame {
         charactersPanel = new Characters();
         highScorePanel = new HighScores();
         gamePanel = new GamePanel();
+        instructionPanel = new Instructions();
         
         
         this.setVisible(true);
@@ -67,6 +69,24 @@ public class MainFrame extends JFrame {
     public void showCharacterUI() {
         this.add(charactersPanel);
         charactersPanel.setBackground(Color.yellow);
+        charactersPanel.setVisible(true);
+    }
+    
+    public void showGamePanel() {
+        this.add(gamePanel);
+        gamePanel.setBackground(Color.yellow);
+        charactersPanel.setVisible(true);
+    }
+    
+    public void showHighScore() {
+        this.add(highScorePanel);
+        highScorePanel.setBackground(Color.yellow);
+        charactersPanel.setVisible(true);
+    }
+    
+    public void showInstructionsPanel() {
+        this.add(instructionPanel);
+        gamePanel.setBackground(Color.yellow);
         charactersPanel.setVisible(true);
     }
 }

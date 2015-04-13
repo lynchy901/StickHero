@@ -5,10 +5,12 @@
  */
 package stickhero;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author nml5182
  */
-public class HighScores {
+public class HighScores extends JPanel {
     
 }

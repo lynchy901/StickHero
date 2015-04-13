@@ -5,10 +5,15 @@
  */
 package stickhero;
 
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author nml5182
  */
-public class Instructions {
-    
+public class Instructions extends JPanel {
+    public Instructions() {
+        this.setBackground(Color.blue);
+    }
 }
