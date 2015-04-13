@@ -56,6 +56,22 @@ public class Hero extends Rectangle
              return heroImg;
         }
     }
+    public Image displayHeroImg(int chosen)
+    {
+        switch(chosen)
+        {
+            case 1:
+                return heroImg1;
+            case 2:
+                return heroImg2;
+            case 3: 
+                return heroImg3;
+            case 4:
+                return heroImg4;
+            default:
+                return heroImg1;
+        }
+    }
 
     public Image changeCharacterImg(int characterNumber)
     {
