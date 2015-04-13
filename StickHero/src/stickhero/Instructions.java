@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  *
  * @author nml5182
  */
-public class Instructions extends JPanel {
+public class Instructions extends JPanel {  
     public Instructions() {
         this.setBackground(Color.blue);
     }
