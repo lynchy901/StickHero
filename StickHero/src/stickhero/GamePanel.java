@@ -119,10 +119,11 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         
         if (e.getKeyCode() == 32) {
             bool = false;
+            tiltBridge();
             extender.stop();
             playerMove.start();
             counter = 0;
-            tiltBridge();
+            
             
 //            bridge = new Rectangle(bridgeStart.x,bridgeStart.y,10,10);
 //            i = 0;
@@ -161,12 +162,66 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         }
         else if(e.getSource() == playerMove)
         {
-            if (hero.getX() < buildingEnd.x - building2.getWidth())
+            if (hero.getX() < bridgeStart.x + bridgeWidth - 50)
             {
+                System.out.println("true, bridge width = " + bridgeWidth);
                 hero.setLocation(hero.getX() + 5, hero.getY());
+            } else {
+                
+                checkForFailure();
+                
             }
+            
+            
+            
         }
     }
     
     
+    
+    public boolean checkForFailure() {
+        
+        boolean flag;
+        
+        if (!checkForBridge() || !checkForPlatform()) {
+           int counter = 0;
+            
+            System.out.println("You have lost");
+            hero.setLocation(hero.getX(), hero.getY() + 1);
+            
+            if (counter > 80) {
+                playerMove.stop();
+            }
+            
+            counter+=5;
+            
+            flag = true;
+        } else {
+            //System.out.println("you are ok");
+            flag = false;
+        }
+        
+        return flag;
+    }
+    
+    
+    public boolean checkForPlatform() { 
+        boolean flag = false;
+        
+        if (hero.getX() + 50 >= building2.getX() && hero.getX() + 50 <= building2.getX() + building2.getWidth()) {
+            flag = true;
+        }
+        
+        return flag;
+    }
+    
+    public boolean checkForBridge() {
+        boolean flag = false;
+        
+        if (hero.getX() + 50 >= bridgeStart.x && hero.getX() + 50 <= bridgeStart.getX() + bridgeWidth) {
+            flag = true;
+        }
+        
+        return flag;
+    }
 }
