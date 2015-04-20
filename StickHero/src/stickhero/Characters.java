@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 public class Characters extends JPanel implements ActionListener
 {
     JLabel characters,hero1,hero2,hero3,hero4,chosenHero;
+    MainFrame parentMainFrame;
     private int characterChosen = 1;
     Hero heroCharacter;
     JButton mainMenu;
@@ -22,10 +23,12 @@ public class Characters extends JPanel implements ActionListener
     JButton character3;
     JButton character4;
     
-    public Characters()
+    public Characters(MainFrame newMainFrame,Hero hero)
     {
+        parentMainFrame = newMainFrame;
+
         this.setLayout(null);
-        heroCharacter = new Hero(characterChosen);
+        heroCharacter = hero;
         
         characters = new JLabel("Character");
         characters.setBounds(550, 30, 100, 50);
@@ -91,23 +94,32 @@ public class Characters extends JPanel implements ActionListener
         if (event == character1)
         {
             characterChosen = 1;
+            heroCharacter.setChoice(characterChosen);
             chosenHero.setIcon(heroCharacter.displayHeroImgIcon(characterChosen));
         }
         if (event == character2)
         {
             characterChosen = 2;
+            heroCharacter.setChoice(characterChosen);
             chosenHero.setIcon(heroCharacter.displayHeroImgIcon(characterChosen));
 
         }
         if (event == character3)
         {
             characterChosen = 3;
+            heroCharacter.setChoice(characterChosen);
             chosenHero.setIcon(heroCharacter.displayHeroImgIcon(characterChosen));
         }
         if (event == character4)
         {
             characterChosen = 4;
+            heroCharacter.setChoice(characterChosen);
             chosenHero.setIcon(heroCharacter.displayHeroImgIcon(characterChosen));
+        }
+        if (event == mainMenu)
+        {
+            this.setVisible(false);
+            parentMainFrame.showMainMenu();  
         }
     }
 }

@@ -33,10 +33,10 @@ public class MainFrame extends JFrame {
         
         splashScreenPanel = new SplashScreen();
         mainMenuPanel = new MainMenu(this);
-        charactersPanel = new Characters();
         highScorePanel = new HighScores();
         hero = new Hero(1);
         gamePanel = new GamePanel(this, hero);
+        charactersPanel = new Characters(this,hero);
         instructionPanel = new Instructions();
         
         
@@ -78,6 +78,8 @@ public class MainFrame extends JFrame {
     public void showGamePanel() {
         this.add(gamePanel);
         gamePanel.setVisible(true);
+        gamePanel.initCharacter();
+        System.out.println(hero.getCharacterNumber());
     }
     
     public void showHighScore() {

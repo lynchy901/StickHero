@@ -25,7 +25,8 @@ public class MainMenu extends JPanel {
     private JLabel artworkLabel;
     private MainFrame parentMainFrame;
     
-    public MainMenu(MainFrame newMainFrame) {
+    public MainMenu(MainFrame newMainFrame) 
+    {
         parentMainFrame = newMainFrame;
         initComponents();
     }
@@ -64,41 +65,40 @@ public class MainMenu extends JPanel {
             }
         });
         
-        instructionsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        instructionsButton.addActionListener(new java.awt.event.ActionListener() 
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 theInstructionsButtonActionPerformed(evt);
             }
         });
         
         playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 thePlayButtonActionPerformed(evt);
             }
-        });
+        });    
         
     }
     
     public void theCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        parentMainFrame.showCharacterUI();
-        
+        parentMainFrame.showCharacterUI();        
     }
     
     public void theInstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        parentMainFrame.showInstructionsPanel();
-        
+        parentMainFrame.showInstructionsPanel();        
     }
     
     public void theHighScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        parentMainFrame.showHighScore();
-        
+        parentMainFrame.showHighScore();        
     }
     
     public void thePlayButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        parentMainFrame.showGamePanel();
-        
+        parentMainFrame.showGamePanel();        
     }
 }

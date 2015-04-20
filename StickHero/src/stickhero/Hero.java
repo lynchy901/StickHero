@@ -1,7 +1,6 @@
 package stickhero;
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -119,5 +118,8 @@ public class Hero extends JLabel
     public int getCharacterNumber() {
         return choice;
     }
-    
+    public void setChoice(int choice)
+    {
+        this.choice = choice;
+    }
 }
