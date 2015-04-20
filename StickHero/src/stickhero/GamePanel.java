@@ -10,11 +10,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -72,8 +73,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         this.setFocusable(true);
         getBuildingData();
         bridge = new Rectangle(bridgeStart.x,bridgeStart.y,10,10);   
-        hero.setIcon(hero.displayHeroImgIcon(hero.getCharacterNumber()));
-        hero.setBounds(bridge.x - 100, bridge.y - 110, 100, 100);
+        initCharacter();
         
     }
     
@@ -83,6 +83,11 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
 
     }
 
+       public void initCharacter()
+    {
+        hero.setIcon(hero.displayHeroImgIcon(hero.getCharacterNumber()));
+        hero.setBounds(bridge.x - 100, bridge.y - 110, 100, 100);
+    }
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
