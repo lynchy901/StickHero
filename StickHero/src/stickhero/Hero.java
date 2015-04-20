@@ -4,15 +4,17 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Stephen
  */
-public class Hero extends Rectangle 
+public class Hero extends JLabel 
 {
     private int heroX;
     private int heroY;
+    private int choice;
     private ImageIcon heroImg;
     private Image heroImg1= Toolkit.getDefaultToolkit().getImage("Images/heroImg1.png");
     private Image heroImg2= Toolkit.getDefaultToolkit().getImage("Images/heroImg2.png");
@@ -23,8 +25,9 @@ public class Hero extends Rectangle
     private ImageIcon heroImgIcon3= new ImageIcon(heroImg3);
     private ImageIcon heroImgIcon4= new ImageIcon(heroImg4);    
 
-    public Hero( int characterNumber)
+    public Hero(int characterNumber)
     {
+        choice = characterNumber;
         changeCharacterImg(characterNumber);
     }
   
@@ -38,13 +41,13 @@ public class Hero extends Rectangle
         heroY = y;
     }
     
-    public Rectangle createRectangle()
-    {
-        this.x = heroX;
-        this.y = heroY;
-        this.setBounds(x,y,20,20);
-        return this;
-    }
+//    public Rectangle createRectangle()
+//    {
+//        this.x = heroX;
+//        this.y = heroY;
+//        this.setBounds(x,y,20,20);
+//        return this;
+//    }
     
     public ImageIcon getHeroImgIcon()
     {
@@ -111,6 +114,10 @@ public class Hero extends Rectangle
 
     public ImageIcon getHeroImgIcon4() {
         return heroImgIcon4;
+    }
+    
+    public int getCharacterNumber() {
+        return choice;
     }
     
 }

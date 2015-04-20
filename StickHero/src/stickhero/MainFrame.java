@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
     private HighScores highScorePanel;
     private GamePanel gamePanel;
     private Instructions instructionPanel;
+    private Hero hero;
     
     public MainFrame() {
         initComponents();
@@ -34,8 +35,10 @@ public class MainFrame extends JFrame {
         mainMenuPanel = new MainMenu(this);
         charactersPanel = new Characters();
         highScorePanel = new HighScores();
-        gamePanel = new GamePanel(this);
+        hero = new Hero(1);
+        gamePanel = new GamePanel(this, hero);
         instructionPanel = new Instructions();
+        
         
         
         this.setVisible(true);
@@ -51,7 +54,7 @@ public class MainFrame extends JFrame {
         splashScreenPanel.setVisible(true);
         
         try {
-            Thread.sleep(4000); //1000 milliseconds is one second.
+            Thread.sleep(0); //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
