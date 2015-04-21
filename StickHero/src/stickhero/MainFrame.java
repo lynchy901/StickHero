@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
         splashScreenPanel = new SplashScreen();
         mainMenuPanel = new MainMenu(this);
         highScorePanel = new HighScores();
-        gameOverPanel = new GameOver();
+        gameOverPanel = new GameOver(this);
         hero = new Hero(1);
         gamePanel = new GamePanel(this, hero);
         charactersPanel = new Characters(this,hero);
@@ -79,6 +79,7 @@ public class MainFrame extends JFrame {
     
     public void showGamePanel() {
         this.add(gamePanel);
+        this.remove(gameOverPanel);
         gamePanel.setVisible(true);
         gamePanel.initCharacter();
         System.out.println(hero.getCharacterNumber());
