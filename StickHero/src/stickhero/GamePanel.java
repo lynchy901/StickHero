@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
     private MainFrame parentMainFrame;
     private JButton building1;
     private JButton building2;
+    private JButton reload = new JButton("Reload");
     private Point bridgeStart,buildingEnd;
     private int bridgeWidth = 10;
     private Hero hero;
@@ -57,13 +58,13 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         building1.setSize(new Dimension(100, 200));
         building2.setSize(new Dimension(100, 200));
         
-        building1.setLocation(new Point(200, 800));
-        building2.setLocation(new Point(800, 800));
+        getBuildingData();       
         
         extender = new Timer(10,this);
         playerMove = new Timer(10, this);
+        reload.setBounds(50,50,50,50);
 
-        
+        this.add(reload);
         this.add(hero);
         this.add(building1);
         this.add(building2);
@@ -71,10 +72,10 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         
         this.addKeyListener(this);
         this.setFocusable(true);
-        getBuildingData();
         bridge = new Rectangle(bridgeStart.x,bridgeStart.y,10,10);   
-        initCharacter();
-        
+        generateBuildingLocations();
+ 
+        reload.addActionListener(this);
     }
     
     public void getBuildingData() {
@@ -83,60 +84,41 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
 
     }
 
-       public void initCharacter()
+    public void initCharacter()
     {
         hero.setIcon(hero.displayHeroImgIcon(hero.getCharacterNumber()));
-        hero.setBounds(bridge.x - 100, bridge.y - 110, 100, 100);
+        hero.setBounds(building1.getX() , building1.getY() - 110, 100, 100);
     }
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.requestFocusInWindow();
-        g.setColor(Color.black);
-        g.fillRect(bridge.x, bridge.y, bridgeWidth, i);
+           
+    
+    public void generateBuildingLocations() 
+    {
+        int building1X;
+        int building2X;
+        
+        building1X = (int)(Math.random() * 600);
+        building2X = (int)((Math.random() * 600) + 500);
+        
+        building1.setLocation(new Point(building1X, 600));
+        building2.setLocation(new Point(building2X, 600));
+        
+          
+        getBuildingData();
+        bridge.setBounds(bridgeStart.x, bridgeStart.y, 10, 10);      
+        repaint();
     }
     
-    @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        
-        Graphics g = this.getGraphics();
-//        g.fillRect(bridge.x, bridge.y,bridge.width,bridge.height);
-        
-        if (e.getKeyCode() == 32) 
-        {
-            bool = true;
-            
-        }
-        if (bool) {
-//            i++;
-            extender.start();
-        }
-        
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        
-        if (e.getKeyCode() == 32) {
-            bool = false;
-            tiltBridge();
-            extender.stop();
-            playerMove.start();
-            counter = 0;
-            
-            
-//            bridge = new Rectangle(bridgeStart.x,bridgeStart.y,10,10);
-//            i = 0;
-            System.out.println("false");
-        }
-    }
+    public void reloadPanel()
+    {
+        generateBuildingLocations();
+        initCharacter();
+        playerMove.stop();
+        i = 0;
+        bridgeWidth = 10;
+    }    
     
-    public void tiltBridge() {
+    public void tiltBridge() 
+    {
         int temp = bridgeWidth;
         bridgeWidth = i;
         i = temp;
@@ -144,16 +126,58 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         bridge.y = bridgeStart.y - 10;
         System.out.println("tilt bridge");
         repaint();
+    }
        
-
+    @Override
+    public void paintComponent(Graphics g) 
+    {
+        super.paintComponent(g);
+        this.requestFocusInWindow();
+        g.setColor(Color.black);
+        g.fillRect(bridge.x, bridge.y, bridgeWidth, i);
     }
     
-//    public void moveHero() {
-//        for (int x = 0; x < 10; x++) 
-//        {
-//            hero.setLocation(hero.getX() + moveDistance, hero.getY());
-//        }
-//    }
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) 
+    {     
+        Graphics g = this.getGraphics();
+        
+        if (e.getKeyCode() == 32 && !playerMove.isRunning()) 
+        {
+            bool = true;
+        }
+        if (bool) 
+        {
+            if (bridge.width >= 5)
+            {
+                bridge.setBounds(bridgeStart.x,bridgeStart.y,0,0);
+            }
+            extender.start();
+        }
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) 
+    {
+        if (e.getKeyCode() == 32 && !playerMove.isRunning()) 
+        {
+            bool = false;
+            tiltBridge();
+            extender.stop();
+            playerMove.start();
+            counter = 0;
+            System.out.println("false");
+        }
+    }
+    
+
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -171,14 +195,15 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
             {
                 System.out.println("true, bridge width = " + bridgeWidth);
                 hero.setLocation(hero.getX() + 5, hero.getY());
-            } else {
-                
+            } 
+            else 
+            {
                 checkForFailure();
-                
             }
-            
-            
-            
+        }
+        if (e.getSource() == reload)
+        {
+            reloadPanel();
         }
     }
     
@@ -189,13 +214,15 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         boolean flag;
         
         if (!checkForBridge() || !checkForPlatform()) {
-           int counter = 0;
+           int counter = hero.getY();
             
             System.out.println("You have lost");
             hero.setLocation(hero.getX(), hero.getY() + 1);
             
-            if (counter > 80) {
-                playerMove.stop();
+            if (counter > 720) 
+            {
+                playerMove.stop(); 
+                parentMainFrame.showGameOver();
             }
             
             counter+=5;
@@ -229,4 +256,5 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         
         return flag;
     }
+
 }

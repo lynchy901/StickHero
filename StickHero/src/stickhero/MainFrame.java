@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
     private Characters charactersPanel;
     private HighScores highScorePanel;
     private GamePanel gamePanel;
+    private GameOver gameOverPanel;
     private Instructions instructionPanel;
     private Hero hero;
     
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame {
         splashScreenPanel = new SplashScreen();
         mainMenuPanel = new MainMenu(this);
         highScorePanel = new HighScores();
+        gameOverPanel = new GameOver();
         hero = new Hero(1);
         gamePanel = new GamePanel(this, hero);
         charactersPanel = new Characters(this,hero);
@@ -42,7 +44,7 @@ public class MainFrame extends JFrame {
         
         
         this.setVisible(true);
-        this.setSize(1200, 1200);
+        this.setSize(1280, 720);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -91,6 +93,13 @@ public class MainFrame extends JFrame {
     public void showInstructionsPanel() {
         this.add(instructionPanel);
         gamePanel.setBackground(Color.yellow);
-        charactersPanel.setVisible(true);
+        instructionPanel.setVisible(true);
+    }
+    
+        public void showGameOver() {
+        this.add(gameOverPanel);
+        this.remove(gamePanel);
+        gameOverPanel.setBackground(Color.black);
+        gameOverPanel.setVisible(true);
     }
 }

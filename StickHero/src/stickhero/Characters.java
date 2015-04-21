@@ -35,7 +35,7 @@ public class Characters extends JPanel implements ActionListener
         this.add(characters);
         
         mainMenu = new JButton("Main Menu");   
-        mainMenu.setBounds(550,750,100,50);
+        mainMenu.setBounds(550,670,100,50);
         mainMenu.addActionListener(this);
         this.add(mainMenu);
         

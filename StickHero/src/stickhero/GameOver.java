@@ -21,17 +21,13 @@ public class GameOver extends JPanel
        this.setSize(1200, 1200);
     }
     
-    public void initComponents(){
-        
-          
-            imageLabel.setIcon(gameOverIcon);
-            
-            imagePanel.add(imageLabel);
-            imagePanel.add(textLabel);
-            
-            this.add(imagePanel);
-            
-            
+    public void initComponents()
+    {
+        imageLabel.setIcon(gameOverIcon);
+        imagePanel.add(imageLabel);
+        imagePanel.add(textLabel);
+
+        this.add(imagePanel);
     }
     
 }
