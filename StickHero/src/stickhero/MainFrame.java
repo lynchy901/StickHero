@@ -28,6 +28,7 @@ public class MainFrame extends JFrame {
         showMainMenu();
         
         
+        
     }
     
     public void initComponents() {
@@ -82,6 +83,7 @@ public class MainFrame extends JFrame {
         this.remove(gameOverPanel);
         gamePanel.setVisible(true);
         gamePanel.initCharacter();
+        gamePanel.reloadPanel();
         System.out.println(hero.getCharacterNumber());
     }
     
@@ -103,4 +105,8 @@ public class MainFrame extends JFrame {
         gameOverPanel.setBackground(Color.black);
         gameOverPanel.setVisible(true);
     }
+        
+        public GamePanel getGamePanelCntl() {
+            return this.gamePanel;
+        }
 }

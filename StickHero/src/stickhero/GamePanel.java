@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,10 +29,11 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
     private MainFrame parentMainFrame;
     private JButton building1;
     private JButton building2;
-    private JButton reload = new JButton("Reload");
+    private JLabel scoreLabel = new JLabel("Score : ");
     private Point bridgeStart,buildingEnd;
     private int bridgeWidth = 10;
     private Hero hero;
+    private int score = 0;
     
     private int i;
     int counter = 0;
@@ -62,12 +64,12 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         
         extender = new Timer(10,this);
         playerMove = new Timer(10, this);
-        reload.setBounds(50,50,50,50);
+        scoreLabel.setBounds(50,50,50,50);
 
-        this.add(reload);
         this.add(hero);
         this.add(building1);
         this.add(building2);
+        this.add(scoreLabel);
         this.setBackground(Color.red);
         
         this.addKeyListener(this);
@@ -75,7 +77,6 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         bridge = new Rectangle(bridgeStart.x,bridgeStart.y,10,10);   
         generateBuildingLocations();
  
-        reload.addActionListener(this);
     }
     
     public void getBuildingData() {
@@ -115,6 +116,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         playerMove.stop();
         i = 0;
         bridgeWidth = 10;
+        score = 0;
     }    
     
     public void tiltBridge() 
@@ -182,6 +184,8 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        int counter = hero.getY();
+
         if (e.getSource() == extender)
         {
             i+=5;
@@ -198,12 +202,25 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
             } 
             else 
             {
-                checkForFailure();
+                if (checkForFailure()) {
+                    System.out.println("You have lost");
+                    hero.setLocation(hero.getX(), hero.getY() + 1);
+
+                    if (counter > 720) 
+                    {
+                        playerMove.stop(); 
+                        parentMainFrame.showGameOver();
+                    }
+
+                    counter+=5;
+                } else {
+                    score++;
+                    scoreLabel.setText("score: " + score);
+                    playerMove.stop();
+                    this.reloadPanel();
+                }
+                
             }
-        }
-        if (e.getSource() == reload)
-        {
-            reloadPanel();
         }
     }
     
@@ -214,19 +231,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         boolean flag;
         
         if (!checkForBridge() || !checkForPlatform()) {
-           int counter = hero.getY();
-            
-            System.out.println("You have lost");
-            hero.setLocation(hero.getX(), hero.getY() + 1);
-            
-            if (counter > 720) 
-            {
-                playerMove.stop(); 
-                parentMainFrame.showGameOver();
-            }
-            
-            counter+=5;
-            
+                       
             flag = true;
         } else {
             //System.out.println("you are ok");
@@ -255,6 +260,10 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         }
         
         return flag;
+    }
+    
+    public int getScore() {
+        return score;
     }
 
 }

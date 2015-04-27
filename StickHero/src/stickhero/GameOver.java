@@ -58,16 +58,24 @@ public class GameOver extends JPanel implements ActionListener
     {
         if (e.getSource() == mainMenu)
         {
+            this.setVisible(false);
             parentMainFrame.showMainMenu();
         }
         if (e.getSource() == playAgain)
         {
+            this.setVisible(false);
             parentMainFrame.showGamePanel();
         }
         if (e.getSource() == saveScore)
         {
-            System.out.println("thisdoesntdoanythingyetlol");  
+            writeScore();
+            this.setVisible(false);
+            parentMainFrame.showHighScore();
         }
+    }
+    
+    public void writeScore() {
+        System.out.println(parentMainFrame.getGamePanelCntl().getScore());
     }
     
     

@@ -6,11 +6,17 @@
 package stickhero;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author nml5182
  */
 public class HighScores extends JPanel {
+    private JTextArea scores = new JTextArea();
+    
+    public HighScores() {
+        
+    }
     
 }
