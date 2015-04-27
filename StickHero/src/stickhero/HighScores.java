@@ -1,109 +1,135 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stickhero;
 
-import java.awt.Color;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author nml5182
- */
-public class HighScores extends JPanel implements ActionListener{
-    public int highScore1,highScore2,highScore3,highScore4,highScore5;
-    public int scoreArray[] = {highScore1,highScore2,highScore3,highScore4,highScore5};
-    public JLabel scores,highScoreView1,highScoreView2,highScoreView3,highScoreView4,highScoreView5;
-    
+public class HighScores extends JPanel implements ActionListener
+{
+    private JLabel title = new JLabel("High Scores"); 
+    private JLabel score1, score2,  score3 ,score4, score5;
+    private JTextField text = new JTextField();
+    private ArrayList<Integer> scoreList = new ArrayList();
+    private int[] top5 = new int[5];
     public JButton mainMenu;
-    public MainFrame parentMainFrame;
-
-    public HighScores(MainFrame parentMainFrame )
+    
+    MainFrame parentMainFrame;
+    
+    public HighScores(MainFrame parentMainFrame)
     {
-        setLayout(null);
-        setBackground(Color.yellow);
-        
         this.parentMainFrame = parentMainFrame;
+        this.setLayout(null);
+        this.add(title);
+        title.setBounds(300,100,200,50);
         
-        highScore1 = 20;
-        highScore2= 12;
-        highScore3=5;
-        highScore4 = 42;
-        highScore5 = 1;
-        
-        this.add(scores = new JLabel("High Scores!"));
-        scores.setBounds(300,100,100,50);
-        
-        this.add(highScoreView1 = new JLabel("Score1 = " +highScore1));
-        highScoreView1.setBounds(200,200,400,50);
-        
-        this.add(highScoreView2 = new JLabel("Score2 = " + highScore2));
-        highScoreView2.setBounds(200,250,400,50);
-        
-        this.add(highScoreView3 = new JLabel("Score3 = " +highScore3));
-        highScoreView3.setBounds(200,300,400,50);
-        
-        this.add(highScoreView4 = new JLabel("Score4 = "+highScore4));
-        highScoreView4.setBounds(200,350,400,50);
-        
-        this.add(highScoreView5 = new JLabel("Score5 = "+highScore5));
-        highScoreView5.setBounds(200,400,400,50);
-        
-        this.add(mainMenu = new JButton("Main Menu")); 
-        mainMenu.setBounds(300, 500, 100, 100);
+//        this.add(text);
+        this.add(mainMenu = new JButton("Main Menu"));
+        mainMenu.setBounds(300,500,100,100);
         mainMenu.addActionListener(this);
         
-        sortScoreBubble(scoreArray);        
+        this.add(score1 = new JLabel("Score1 = " +top5[0]));
+        score1.setBounds(200,200,400,50);
+        
+        this.add(score2 = new JLabel("Score2 = " +top5[1]));
+        score2.setBounds(200,250,400,50);
+        
+        this.add(score3 = new JLabel("Score3 = " +top5[2]));
+        score3.setBounds(200,300,400,50);
+        
+        this.add(score4 = new JLabel("Score4 = "+top5[3]));
+        score4.setBounds(200,350,400,50);
+        
+        this.add(score5 = new JLabel("Score5 = "+top5[4]));
+        score5.setBounds(200,400,400,50);
+        
+    }
+    
+    public void readScores() throws IOException {
+        System.out.println("Read scores has been called");
+        try 
+            {
+                FileReader in = new FileReader("scores.txt");
+        	BufferedReader inStream = new BufferedReader(in); 
+        	String line = inStream.readLine();
+
+        	while (line != null && line != "") 
+        	{   
+                    line = inStream.readLine();
+                    scoreList.add(Integer.parseInt(line));
+                    System.out.println(line);
+                    System.out.println(line);
+                    
+        	}
+
+         inStream.close();  
+         
+         displayHighestScores();
+
+     	} 
+     	catch (FileNotFoundException e) 
+     	{
+                System.out.println("errer");
+        	 System.err.println("IOERROR: File NOT Found: \n");
+        	 e.printStackTrace();
+        }
+    }
+    
+    public void displayHighestScores() {
+        int highest = scoreList.get(0);
+        int counter = 0;
+        int index = 0;
+        
+//        if (scoreList.size() < 5) {
+//            counter = scoreList.size();
+//        } else {
+//            counter = 5;
+//        }
+//        
+//        for (int i = 0; i < counter; i++) {
+//            for (int x = i + 1; x < scoreList.size(); x++) {
+//                if (Integer.parseInt(scoreList.get(i)) > highest) {
+//                    highest = Integer.parseInt(scoreList.get(i));
+//                }
+//            }
+                int temp;
+        
+        for(int i=0;i<scoreList.size()-1;i++)
+        {
+            for(int j = 1;j<scoreList.size()-i;j++)
+            {
+                if(scoreList.get(j-1) > scoreList.get(j))
+                {
+                    temp = scoreList.get(j-1);
+                    scoreList.set((j-1),(scoreList.get(j)));
+                    scoreList.set((j),temp);
+                }
+            }  
+        }
+        
+
+    score1.setText("Score1 = "+top5[0]);
+    score2.setText("Score2 = "+top5[1]);
+    score3.setText("Score3 = "+top5[2]);
+    score4.setText("Score4 = "+top5[3]);
+    score5.setText("Score5 = "+top5[4]);
+ 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e) {
+    Object event = e.getSource();
+    if (event == mainMenu)
     {
-        Object event = e.getSource();
-        if (event == mainMenu)
-        {
-            parentMainFrame.switchPanel(this,parentMainFrame.getMainMenuPanel());
-        }
+        parentMainFrame.switchPanel(this,parentMainFrame.getMainMenuPanel());        
     }
-    
-    public final int[] sortScoreBubble(int [] array)
-    {
-        int temp;
-        
-        for(int i=0;i<array.length-1;i++)
-        {
-            for(int j = 1;j<array.length-i;j++)
-            {
-                if(array[j-1] > array[j])
-                {
-                    temp = array[j-1];
-                    array[j-1]=array[j];
-                    array[j]=temp;
-                }
-            }
-        }
-        highScore1 = array[0];
-        highScore2 = array[1];
-        highScore3 = array[2];
-        highScore4 = array[3];
-        highScore5 = array[4];
-        setScoreText();
-        return array;        
-    }
-    
-    public void setScoreText()
-    {
-        highScoreView1 = new JLabel("Score1 = " +highScore1);
-        highScoreView2 = new JLabel("Score2 = " + highScore2);
-        highScoreView3 = new JLabel("Score3 = " +highScore3);
-        highScoreView4 = new JLabel("Score4 = "+highScore4);
-        highScoreView5 = new JLabel("Score5 = "+highScore5);
-        
     }
 }

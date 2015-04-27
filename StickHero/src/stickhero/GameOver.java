@@ -5,6 +5,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,13 +26,8 @@ public class GameOver extends JPanel implements ActionListener
     MainFrame parentMainFrame;
 
     
-    public GameOver(MainFrame parentMainFrame)
+    public GameOver(MainFrame frame)
     {    
-       this.initComponents(); 
-    }
-    
-    public void initComponents()
-    {
         this.setLayout(null);
         setBackground(Color.black);
         
@@ -51,7 +51,7 @@ public class GameOver extends JPanel implements ActionListener
         this.add(saveScore);
         
         this.add(textLabel);
-        this.parentMainFrame = parentMainFrame;
+        this.parentMainFrame = frame;
     }
 
     @Override
@@ -63,18 +63,38 @@ public class GameOver extends JPanel implements ActionListener
         }
         if (e.getSource() == playAgain)
         {
+            parentMainFrame.getGamePanel().reloadPanel();
             parentMainFrame.switchPanel(this,parentMainFrame.getGamePanel());
 
         }
         if (e.getSource() == saveScore)
         {
-            writeScore();
+            try
+            {
+                writeScore();
+            }
+            catch (IOException ex)
+            {
+                Logger.getLogger(GameOver.class.getName()).log(Level.SEVERE, null, ex);
+            }
             parentMainFrame.switchPanel(this,parentMainFrame.getHighScorePanel());
         }
     }
     
-    public void writeScore() 
-    {
+    public void writeScore() throws IOException {
         System.out.println(parentMainFrame.getGamePanelCntl().getScore());
+        try
+        {
+            FileOutputStream out = new FileOutputStream("scores.txt", true);
+            PrintStream userInfo = new PrintStream(out);
+
+            String lineEntered = "" + parentMainFrame.getGamePanelCntl().getScore();
+            userInfo.println(lineEntered);
+        }
+        catch (Exception e)
+        {
+      	    e.printStackTrace();
+        }
+        parentMainFrame.getHighScorePanel().readScores();
     }
 }

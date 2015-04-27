@@ -120,7 +120,6 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         playerMove.stop();
         i = 0;
         bridgeWidth = 10;
-        score = 0;
     }    
     
     public void tiltBridge() 
