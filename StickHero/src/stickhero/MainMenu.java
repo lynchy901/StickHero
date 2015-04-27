@@ -6,6 +6,8 @@
 package stickhero;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +17,7 @@ import javax.swing.SwingConstants;
  *
  * @author nml5182
  */
-public class MainMenu extends JPanel {
+public class MainMenu extends JPanel implements ActionListener{
     private JLabel stickHeroLabel;
     private JButton instructionsButton;
     private JButton soundButton;
@@ -53,52 +55,35 @@ public class MainMenu extends JPanel {
         this.add(highScoreButton);
         this.add(artworkLabel);
         
-        characterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                theCharacterButtonActionPerformed(evt);
-            }
-        });
+        characterButton.addActionListener(this);
         
-        highScoreButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                theHighScoreButtonActionPerformed(evt);
-            }
-        });
+        highScoreButton.addActionListener(this);
         
-        instructionsButton.addActionListener(new java.awt.event.ActionListener() 
+        instructionsButton.addActionListener(this);
+        
+        playButton.addActionListener(this);       
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        Object event = e.getSource();
+        if(event == characterButton)
         {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                theInstructionsButtonActionPerformed(evt);
-            }
-        });
-        
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                thePlayButtonActionPerformed(evt);
-            }
-        });    
-        
-    }
-    
-    public void theCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        this.setVisible(false);
-        parentMainFrame.showCharacterUI();        
-    }
-    
-    public void theInstructionsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        this.setVisible(false);
-        parentMainFrame.showInstructionsPanel();        
-    }
-    
-    public void theHighScoreButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        this.setVisible(false);
-        parentMainFrame.showHighScore();        
-    }
-    
-    public void thePlayButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        this.setVisible(false);
-        parentMainFrame.showGamePanel();        
+            parentMainFrame.switchPanel(this, parentMainFrame.getCharactersPanel());
+        }
+        if (event == instructionsButton)
+        {
+            parentMainFrame.switchPanel(this,parentMainFrame.getInstructionPanel());
+        }
+        if (event == highScoreButton)
+        {
+            parentMainFrame.switchPanel(this, parentMainFrame.getHighScorePanel());
+        }
+        if (event == playButton)
+        {
+            parentMainFrame.switchPanel(this, parentMainFrame.getGamePanel());
+        }
     }
 }

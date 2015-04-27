@@ -5,6 +5,7 @@
  */
 package stickhero;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -28,6 +29,8 @@ public class Characters extends JPanel implements ActionListener
         parentMainFrame = newMainFrame;
 
         this.setLayout(null);
+        this.setBackground(Color.yellow);
+        
         heroCharacter = hero;
         
         characters = new JLabel("Character");
@@ -35,7 +38,7 @@ public class Characters extends JPanel implements ActionListener
         this.add(characters);
         
         mainMenu = new JButton("Main Menu");   
-        mainMenu.setBounds(550,670,100,50);
+        mainMenu.setBounds(550,600,100,50);
         mainMenu.addActionListener(this);
         this.add(mainMenu);
         

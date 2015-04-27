@@ -7,6 +7,7 @@ package stickhero;
 
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -49,12 +50,12 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.add(splashScreenPanel);
+        this.add(getSplashScreenPanel());
     }
     
     public void showSplashScreen() {
         
-        splashScreenPanel.setVisible(true);
+        getSplashScreenPanel().setVisible(true);
         
         try {
             Thread.sleep(0); //1000 milliseconds is one second.
@@ -62,51 +63,106 @@ public class MainFrame extends JFrame {
             Thread.currentThread().interrupt();
         }
         
-        splashScreenPanel.setVisible(false);
+        getSplashScreenPanel().setVisible(false);
     }
     
     public void showMainMenu() {
         
-        this.add(mainMenuPanel);
-        mainMenuPanel.setBackground(Color.red);
-        mainMenuPanel.setVisible(true);
+        this.add(getMainMenuPanel());
+        getMainMenuPanel().setBackground(Color.red);
+        getMainMenuPanel().setVisible(true);
     }
     
     public void showCharacterUI() {
-        this.add(charactersPanel);
-        charactersPanel.setBackground(Color.yellow);
-        charactersPanel.setVisible(true);
+        this.add(getCharactersPanel());
+        getCharactersPanel().setBackground(Color.yellow);
+        getCharactersPanel().setVisible(true);
     }
     
     public void showGamePanel() {
-        this.add(gamePanel);
-        this.remove(gameOverPanel);
-        gamePanel.setVisible(true);
-        gamePanel.initCharacter();
-        gamePanel.reloadPanel();
+        this.add(getGamePanel());
+        this.remove(getGameOverPanel());
+        getGamePanel().setVisible(true);
+        getGamePanel().initCharacter();
+        getGamePanel().reloadPanel();
         System.out.println(hero.getCharacterNumber());
     }
     
     public void showHighScore() {
-        this.add(highScorePanel);
-        highScorePanel.setBackground(Color.yellow);
-        charactersPanel.setVisible(true);
+        this.add(getHighScorePanel());
+        getHighScorePanel().setBackground(Color.yellow);
+        getCharactersPanel().setVisible(true);
     }
     
     public void showInstructionsPanel() {
-        this.add(instructionPanel);
-        gamePanel.setBackground(Color.yellow);
-        instructionPanel.setVisible(true);
+        this.add(getInstructionPanel());
+        getGamePanel().setBackground(Color.yellow);
+        getInstructionPanel().setVisible(true);
     }
     
         public void showGameOver() {
-        this.add(gameOverPanel);
-        this.remove(gamePanel);
-        gameOverPanel.setBackground(Color.black);
-        gameOverPanel.setVisible(true);
+        this.add(getGameOverPanel());
+        this.remove(getGamePanel());
+        getGameOverPanel().setBackground(Color.black);
+        getGameOverPanel().setVisible(true);
     }
         
         public GamePanel getGamePanelCntl() {
-            return this.gamePanel;
+            return this.getGamePanel();
         }
+
+    /**
+     * @return the splashScreenPanel
+     */
+    public SplashScreen getSplashScreenPanel() {
+        return splashScreenPanel;
+    }
+
+    /**
+     * @return the mainMenuPanel
+     */
+    public MainMenu getMainMenuPanel() {
+        return mainMenuPanel;
+    }
+
+    /**
+     * @return the charactersPanel
+     */
+    public Characters getCharactersPanel() {
+        return charactersPanel;
+    }
+
+    /**
+     * @return the highScorePanel
+     */
+    public HighScores getHighScorePanel() {
+        return highScorePanel;
+    }
+
+    /**
+     * @return the gamePanel
+     */
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    /**
+     * @return the gameOverPanel
+     */
+    public GameOver getGameOverPanel() {
+        return gameOverPanel;
+    }
+
+    /**
+     * @return the instructionPanel
+     */
+    public Instructions getInstructionPanel() {
+        return instructionPanel;
+    }
+
+    public void switchPanel(JPanel p1, JPanel p2) 
+    {
+        this.remove(p1);
+        this.add(p2);
+    }
 }
