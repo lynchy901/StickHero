@@ -49,6 +49,8 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         parentMainFrame = newMainFrame;
         hero = newHero;
         initComponents();
+        reloadPanel();
+
     }
     
     public void initComponents() {
