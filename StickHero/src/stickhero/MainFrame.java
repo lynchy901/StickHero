@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
         hero = new Hero(1);
         gamePanel = new GamePanel(this, hero);
         charactersPanel = new Characters(this,hero);
-        instructionPanel = new Instructions();
+        instructionPanel = new Instructions(this);
         
         this.setVisible(true);
         this.setSize(1280, 720);
