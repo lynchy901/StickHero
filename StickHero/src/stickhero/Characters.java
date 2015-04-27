@@ -122,7 +122,7 @@ public class Characters extends JPanel implements ActionListener
         if (event == mainMenu)
         {
             this.setVisible(false);
-            parentMainFrame.showMainMenu();  
+            parentMainFrame.switchPanel(this,parentMainFrame.getMainMenuPanel()); 
         }
     }
 }

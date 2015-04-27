@@ -1,5 +1,6 @@
 package stickhero;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -22,14 +23,14 @@ public class GameOver extends JPanel implements ActionListener
     
     public GameOver(MainFrame parentMainFrame)
     {    
-        this.setLayout(null);
        this.initComponents(); 
-       this.parentMainFrame = parentMainFrame;
-       this.setSize(1280, 720);
     }
     
     public void initComponents()
     {
+        this.setLayout(null);
+        setBackground(Color.black);
+        
         imageLabel.setIcon(gameOverIcon);
         imageLabel.setBounds(0,0,1137,720);
         this.add(imageLabel);
@@ -49,8 +50,8 @@ public class GameOver extends JPanel implements ActionListener
         saveScore.setBounds(1137 , 500, 153, 100);
         this.add(saveScore);
         
-
         this.add(textLabel);
+        this.parentMainFrame = parentMainFrame;
     }
 
     @Override
@@ -58,25 +59,22 @@ public class GameOver extends JPanel implements ActionListener
     {
         if (e.getSource() == mainMenu)
         {
-            this.setVisible(false);
-            parentMainFrame.showMainMenu();
+            parentMainFrame.switchPanel(this,parentMainFrame.getMainMenuPanel());
         }
         if (e.getSource() == playAgain)
         {
-            this.setVisible(false);
-            parentMainFrame.showGamePanel();
+            parentMainFrame.switchPanel(this,parentMainFrame.getGamePanel());
+
         }
         if (e.getSource() == saveScore)
         {
             writeScore();
-            this.setVisible(false);
-            parentMainFrame.showHighScore();
+            parentMainFrame.switchPanel(this,parentMainFrame.getHighScorePanel());
         }
     }
     
-    public void writeScore() {
+    public void writeScore() 
+    {
         System.out.println(parentMainFrame.getGamePanelCntl().getScore());
     }
-    
-    
 }

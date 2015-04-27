@@ -5,7 +5,6 @@
  */
 package stickhero;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -26,8 +25,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         initComponents();
         showSplashScreen();
-        showMainMenu();
-        
+        this.add(getMainMenuPanel());        
         
         
     }
@@ -42,8 +40,6 @@ public class MainFrame extends JFrame {
         gamePanel = new GamePanel(this, hero);
         charactersPanel = new Characters(this,hero);
         instructionPanel = new Instructions();
-        
-        
         
         this.setVisible(true);
         this.setSize(1280, 720);
@@ -65,96 +61,65 @@ public class MainFrame extends JFrame {
         
         getSplashScreenPanel().setVisible(false);
     }
-    
-    public void showMainMenu() {
         
-        this.add(getMainMenuPanel());
-        getMainMenuPanel().setBackground(Color.red);
-        getMainMenuPanel().setVisible(true);
+    public GamePanel getGamePanelCntl() 
+    {
+        return this.getGamePanel();
     }
-    
-    public void showCharacterUI() {
-        this.add(getCharactersPanel());
-        getCharactersPanel().setBackground(Color.yellow);
-        getCharactersPanel().setVisible(true);
-    }
-    
-    public void showGamePanel() {
-        this.add(getGamePanel());
-        this.remove(getGameOverPanel());
-
-        System.out.println(hero.getCharacterNumber());
-    }
-    
-    public void showHighScore() {
-        this.add(getHighScorePanel());
-        getHighScorePanel().setBackground(Color.yellow);
-        getCharactersPanel().setVisible(true);
-    }
-    
-    public void showInstructionsPanel() {
-        this.add(getInstructionPanel());
-        getGamePanel().setBackground(Color.yellow);
-        getInstructionPanel().setVisible(true);
-    }
-    
-        public void showGameOver() {
-        this.add(getGameOverPanel());
-        this.remove(getGamePanel());
-        getGameOverPanel().setBackground(Color.black);
-        getGameOverPanel().setVisible(true);
-    }
-        
-        public GamePanel getGamePanelCntl() {
-            return this.getGamePanel();
-        }
 
     /**
      * @return the splashScreenPanel
      */
-    public SplashScreen getSplashScreenPanel() {
+    public SplashScreen getSplashScreenPanel()
+    {
         return splashScreenPanel;
     }
 
     /**
      * @return the mainMenuPanel
      */
-    public MainMenu getMainMenuPanel() {
+    public MainMenu getMainMenuPanel() 
+    {
         return mainMenuPanel;
     }
 
     /**
      * @return the charactersPanel
      */
-    public Characters getCharactersPanel() {
+    public Characters getCharactersPanel() 
+    {
         return charactersPanel;
     }
 
     /**
      * @return the highScorePanel
      */
-    public HighScores getHighScorePanel() {
+    public HighScores getHighScorePanel()
+    {
         return highScorePanel;
     }
 
     /**
      * @return the gamePanel
      */
-    public GamePanel getGamePanel() {
+    public GamePanel getGamePanel()
+    {
         return gamePanel;
     }
 
     /**
      * @return the gameOverPanel
      */
-    public GameOver getGameOverPanel() {
+    public GameOver getGameOverPanel()
+    {
         return gameOverPanel;
     }
 
     /**
      * @return the instructionPanel
      */
-    public Instructions getInstructionPanel() {
+    public Instructions getInstructionPanel() 
+    {
         return instructionPanel;
     }
 

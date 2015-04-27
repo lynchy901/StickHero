@@ -5,6 +5,7 @@
  */
 package stickhero;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ public class MainMenu extends JPanel implements ActionListener{
     public void initComponents() {
         
         this.setLayout(new GridLayout(0,1));
+        setBackground(Color.red);
         stickHeroLabel = new JLabel("Welcome to Stick Hero");
         stickHeroLabel.setHorizontalAlignment(SwingConstants.CENTER);
         playButton = new JButton("Play");

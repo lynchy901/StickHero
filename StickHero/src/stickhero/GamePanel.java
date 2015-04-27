@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
     private Point bridgeStart,buildingEnd;
     private int bridgeWidth = 10;
     private Hero hero;
-    private int score = 0;
+    private int score;
     
     private int i;
     int counter = 0;
@@ -73,6 +73,8 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         this.add(building2);
         this.add(scoreLabel);
         this.setBackground(Color.red);
+        
+        score = 0;
         
         this.addKeyListener(this);
         this.setFocusable(true);
@@ -128,7 +130,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         i = temp;
         bridge.x = bridgeStart.x + 10;
         bridge.y = bridgeStart.y - 10;
-        System.out.println("tilt bridge");
+//        System.out.println("tilt bridge");
         repaint();
     }
        
@@ -177,7 +179,7 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
             extender.stop();
             playerMove.start();
             counter = 0;
-            System.out.println("false");
+//            System.out.println("false");
         }
     }
     
@@ -192,40 +194,45 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         {
             i+=5;
             bridge.y-=5;
-            System.out.println("boop" + extender.toString());
+//            System.out.println("boop" + extender.toString());
             repaint();
         }
         else if(e.getSource() == playerMove)
         {
             if (hero.getX() < bridgeStart.x + bridgeWidth - 50)
             {
-                System.out.println("true, bridge width = " + bridgeWidth);
+//                System.out.println("true, bridge width = " + bridgeWidth);
                 hero.setLocation(hero.getX() + 5, hero.getY());
             } 
             else 
             {
                 if (checkForFailure()) {
-                    System.out.println("You have lost");
+//                    System.out.println("You have lost");
                     hero.setLocation(hero.getX(), hero.getY() + 1);
 
                     if (counter > 720) 
                     {
                         playerMove.stop(); 
-                        parentMainFrame.showGameOver();
+                        parentMainFrame.switchPanel(this, parentMainFrame.getGameOverPanel());
                     }
 
                     counter+=5;
-                } else {
-                    score++;
-                    scoreLabel.setText("score: " + score);
-                    playerMove.stop();
-                    this.reloadPanel();
+                } else 
+                {
+                    nextLevel();
                 }
                 
             }
         }
     }
     
+    public void nextLevel()
+    {
+        score++;
+        scoreLabel.setText("score: " + score);
+        playerMove.stop();
+        this.reloadPanel();
+    }
     
     
     public boolean checkForFailure() {
@@ -264,7 +271,8 @@ public class GamePanel extends JPanel implements KeyListener,ActionListener {
         return flag;
     }
     
-    public int getScore() {
+    public int getScore()
+    {
         return score;
     }
 
